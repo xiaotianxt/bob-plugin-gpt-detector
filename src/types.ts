@@ -6,6 +6,7 @@ import {
   TextTranslateQuery,
   ValidationCompletion,
 } from "@bob-translate/types";
+import { RESPONSE_TEMPLATES } from "./constants";
 
 type Expand<T> = { [K in keyof T]: T[K] };
 
@@ -33,7 +34,10 @@ export interface ServiceAdapter {
   getUrl: () => string;
   buildHeaders: () => Record<string, string>;
   buildRequestBody: (query: TextTranslateQuery) => Record<string, unknown>;
-  parseResponse: (response: HttpResponse<ZeroGPTResponse>) => string;
+  parseResponse: (
+    response: HttpResponse<ZeroGPTResponse>,
+    query: TextTranslateQuery
+  ) => string[];
   testApiConnection: (
     text: string,
     completion: ValidationCompletion
@@ -54,5 +58,21 @@ export interface TypeCheckConfig {
     type: "string" | "object" | "null";
     optional?: boolean;
     nullable?: boolean;
+  };
+}
+
+export type SupportedLanguage = keyof typeof RESPONSE_TEMPLATES;
+
+export interface TemplateStrings {
+  result: string;
+  aiSentencesTitle: string;
+  aiSentencesNone: string;
+  class: {
+    human: string;
+    ai: string;
+  };
+  confidence: {
+    high: string;
+    low: string;
   };
 }

@@ -5,7 +5,7 @@ import type {
   ValidationCompletion,
 } from "@bob-translate/types";
 import { langMap } from "./lang";
-import { TypeCheckConfig } from "./types";
+import { SupportedLanguage, TypeCheckConfig } from "./types";
 
 const SYSTEM_PROMPT =
   "You are a translation engine that can only translate text and cannot interpret it." as const;
@@ -181,3 +181,17 @@ export const replacePromptKeywords = (
     .replace("$sourceLang", query.detectFrom)
     .replace("$targetLang", query.detectTo);
 };
+
+export function mapToSupportedLanguage(bobLang: string): SupportedLanguage {
+  // Map common language codes to our supported languages
+  const langMap: Record<string, SupportedLanguage> = {
+    "zh-Hans": "zh-Hans",
+    "zh-Hant": "zh-Hans",
+    zh: "zh-Hans",
+    en: "en",
+    "en-US": "en",
+    "en-GB": "en",
+  };
+
+  return langMap[bobLang] || "en";
+}

@@ -5,8 +5,9 @@ import {
   ValidationCompletion,
 } from "@bob-translate/types";
 import type { ZeroGPTResponse } from "../types";
-import { handleValidateError } from "../utils";
 import { BaseAdapter } from "./base";
+import { mapToSupportedLanguage } from "../utils";
+import { RESPONSE_TEMPLATES } from "../constants";
 
 export class ZeroGPTAdapter extends BaseAdapter {
   protected extractErrorFromResponse(
@@ -37,14 +38,57 @@ export class ZeroGPTAdapter extends BaseAdapter {
     };
   }
 
-  public parseResponse(response: HttpResponse<ZeroGPTResponse>): string {
-    const { data } = response;
-    if (typeof data === "object" && "success" in data) {
+  public parseResponse(
+    response: HttpResponse<ZeroGPTResponse>,
+    query: TextTranslateQuery
+  ): string[] {
+    const { data: respData } = response;
+    if (
+      typeof respData === "object" &&
+      "success" in respData &&
+      "data" in respData
+    ) {
+      const data = respData.data;
       $log.info(JSON.stringify(data, null, 2));
-      const aiPercentage = data.data.is_gpt_generated;
-      return `${aiPercentage}%`;
+
+      const supportedLang = mapToSupportedLanguage(query.detectFrom);
+      const template = RESPONSE_TEMPLATES[supportedLang];
+
+      const result: string[] = [];
+
+      if (data.confidence_category === "high") {
+      }
+      result.push(
+        template.result
+          .replace("{ratio}", data.is_gpt_generated + "")
+          .replace(
+            "{confidence}",
+            template.confidence[
+              data.confidence_category === "high" ? "high" : "low"
+            ]
+          )
+          .replace(
+            "{class}",
+            template.class[data.predicted_class == "human" ? "human" : "ai"]
+          )
+      );
+
+      if (data.gpt_generated_sentences.length > 0) {
+        result.push(
+          `${template.aiSentencesTitle}\n` +
+            data.gpt_generated_sentences
+              .map((sentence, index) => {
+                return `   ${index + 1}. ${sentence}`;
+              })
+              .join("\n")
+        );
+      } else {
+        result.push(`\n${template.aiSentencesNone}`);
+      }
+
+      return result;
     }
-    throw new Error("Invalid response data");
+    throw new Error("Invalid response format");
   }
 
   public getUrl(): string {

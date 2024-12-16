@@ -14,7 +14,7 @@ export abstract class BaseAdapter implements ServiceAdapter {
 
   abstract buildRequestBody(query: TextTranslateQuery): Record<string, unknown>;
 
-  abstract parseResponse(response: HttpResponse<ZeroGPTResponse>): string;
+  abstract parseResponse(response: HttpResponse<ZeroGPTResponse>, query: TextTranslateQuery): string[];
 
   abstract testApiConnection(
     test: string,
@@ -25,12 +25,12 @@ export abstract class BaseAdapter implements ServiceAdapter {
     response: HttpResponse<any>
   ): ServiceError;
 
-  protected handleGeneralCompletion(query: TextTranslateQuery, text: string) {
+  protected handleGeneralCompletion(query: TextTranslateQuery, result: string[]) {
     query.onCompletion({
       result: {
         from: query.detectFrom,
         to: query.detectTo,
-        toParagraphs: text.split("\n"),
+        toParagraphs: result,
       },
     });
   }
@@ -72,7 +72,7 @@ export abstract class BaseAdapter implements ServiceAdapter {
       if (result.error || result.response.statusCode >= 400) {
         handleGeneralError(query, this.extractErrorFromResponse(result));
       } else {
-        const text = this.parseResponse(result);
+        const text = this.parseResponse(result, query);
         this.handleGeneralCompletion(query, text);
       }
     } catch (error) {
