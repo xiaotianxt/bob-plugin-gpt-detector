@@ -1,14 +1,12 @@
 {
     "identifier": "xiaotianxt.gpt.detector",
-    "version": "0.1.0",
+    "version": "0.0.0",
     "category": "translate",
-    "name": "BobPluginGPTDetector",
-    "summary": "",
-    "icon": "",
+    "name": "GPT Detector",
+    "summary": "识别 AI 文本从未如此丝滑。",
     "author": "xiaotianxt <me@xiaotian.dev>",
     "homepage": "https://github.com/xiaotianxt/bob-plugin-gpt-detector#readme",
-    "appcast": "",
-    "minBobVersion": "0.5.0",
+    "minBobVersion": "1.8.0",
     "options": [
         {
             "identifier": "serviceProvider",

@@ -27,6 +27,6 @@
 3. 复制 `x-rapidapi-key` 并粘贴到配置中。  
    Copy the `x-rapidapi-key` and paste it into the `API Key` configuration.
 
-## 致谢 | Acknowledgments
+## Acknowledgments 致谢
 
 - [bob-plugin-openai-translator](https://github.com/openai-translator/bob-plugin-openai-translator)  
