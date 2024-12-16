@@ -50,13 +50,15 @@ jobs:
         with:
           node-version-file: .node-version
           cache: pnpm
+          registry-url: https://registry.npmjs.org
 
       - run: pnpm install
       - run: pnpm run build
 
       - name: Package plugin
         run: |
-          zip -j -r dist/gpt-detector-${{ env.VERSION_NUMBER }}.bobplugin ./dist/*
+          mkdir -p dist
+          zip -j -r dist/gpt-detector-${{ env.VERSION_NUMBER }}.bobplugin ./dist.bobplugin/*
           echo "Packaged file: dist/gpt-detector-${{ env.VERSION_NUMBER }}.bobplugin"
 
       - name: Update appcast.json
