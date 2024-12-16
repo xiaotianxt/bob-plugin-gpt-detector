@@ -10,6 +10,8 @@
 
 ---
 
+![Demo](./assets/demo.jpg)
+
 ## Instruction 教程
 
 ### Installation 安装
