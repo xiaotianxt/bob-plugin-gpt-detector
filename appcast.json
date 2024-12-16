@@ -1,4 +1,12 @@
 {
   "identifier": "xiaotianxt.gpt.detector",
-  "versions": []
+  "versions": [
+    {
+      "version": "0.1.0",
+      "desc": "🎉 发布首个版本，支持 GPTZero 检测",
+      "sha256": "bffa302e9b5c5b186e79524ca9af6cafc5d1283a3fa935bed247770638bf119b",
+      "url": "https://github.com/xiaotianxt/bob-plugin-gpt-detector/releases/download/v0.1.0/gpt-detector-0.1.0.bobplugin",
+      "minBobVersion": "1.8.0"
+    }
+  ]
 }

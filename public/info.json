@@ -1,6 +1,6 @@
 {
     "identifier": "xiaotianxt.gpt.detector",
-    "version": "0.0.0",
+    "version": "0.1.0",
     "category": "translate",
     "name": "GPT Detector",
     "summary": "识别 AI 文本从未如此丝滑。",
