@@ -8,11 +8,7 @@
   <samp>识别 AI 文本从未如此丝滑。</samp>
 </p>
 
----
-
 ![Demo](./assets/demo.jpg)
-
-## Instruction 教程
 
 ### Installation 安装
 
