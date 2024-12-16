@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "lib": [
+      "es2018"
+    ], // 添加 es2015 库以支持 Map 和其他 ES6 特性
+    "types": [
+      "@bob-translate/types"
+    ],
+    "strict": true,
+    "skipLibCheck": true
+  }
+}

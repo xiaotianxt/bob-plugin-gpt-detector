@@ -1,0 +1,30 @@
+{
+    "identifier": "xiaotianxt.gpt.detector",
+    "version": "0.1.0",
+    "category": "translate",
+    "name": "BobPluginGPTDetector",
+    "summary": "",
+    "icon": "",
+    "author": "xiaotianxt <me@xiaotian.dev>",
+    "homepage": "https://github.com/xiaotianxt/bob-plugin-gpt-detector#readme",
+    "appcast": "",
+    "minBobVersion": "0.5.0",
+    "options": [
+        {
+            "identifier": "serviceProvider",
+            "type": "menu",
+            "title": "Service Provider",
+            "menuValues": [
+                {
+                    "title": "GPTZero",
+                    "value": "GPTZero"
+                }
+            ]
+        },
+        {
+            "identifier": "apiKey",
+            "type": "text",
+            "title": "API Key"
+        }
+    ]
+}
